@@ -34,6 +34,8 @@ if __name__ == '__main__':
     print('strip initialized')
 
     print('Press Ctrl-C to quit.')
+
+    strip.setPixelColor(0, Color(0, 255, 0))
     if not args.clear:
         print('Use "-c" argument to clear LEDs on exit')
 
@@ -42,6 +44,8 @@ if __name__ == '__main__':
         while True:
             print('Set pixel')
             strip.setPixelColor(0, Color(0, 255, 0))
+            strip.show()
+            time.sleep(1)
 
     except KeyboardInterrupt:
         if args.clear:
