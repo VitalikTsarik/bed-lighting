@@ -86,7 +86,7 @@ effects = {
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('effect', metavar='str', type=str, help='available effect: chase, chaseRainbow, wheel, rainbow, rainbowCycle')
+    parser.add_argument('effect', metavar='effect type', type=str, help='available effect: chase, chaseRainbow, wheel, rainbow, rainbowCycle')
     args = parser.parse_args()
     print(f'Chosen effect: {args.effect}')
 
@@ -98,12 +98,10 @@ if __name__ == '__main__':
     print('Press Ctrl-C to quit.')
 
     try:
-        effects[args.effect](strip)
         while True:
-            print('Set pixel')
-            strip.setPixelColor(0, Color(0, 0, 255))
-            strip.show()
-            time.sleep(1)
+            print('animation repeat')
+            effects[args.effect](strip)
+            time.sleep(5)
 
     except KeyboardInterrupt:
         colorWipe(strip, Color(0, 0, 0), 10)
