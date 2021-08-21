@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <form id="color">
+        <div>
+            <input id="red" type="range" min="0" max="255">
+            <output id="redOutput" name="redOutput" for="red" onforminput="value = red.valueAsNumber;"
+                    class="output"></output>
+            <label for="red">Red</label>
+        </div>
+        <div>
+            <input id="green" type="range" min="0" max="255">
+            <label for="green">Green</label>
+        </div>
+        <div>
+            <input id="blue" type="range" min="0" max="255">
+            <label for="blue">Blue</label>
+        </div>
+    </form>
+
+    <script>
+        const redOutput = document.getElementById('redOutput');
+        const red = document.getElementById('red');
+
+        redOutput.value = parseInt(red.value);
+        const form = document.getElementById('color').addEventListener('input', () => {
+            redOutput.value = parseInt(red.value);
+        });
+    </script>
+</body>
+</html>
