@@ -6,31 +6,66 @@
     <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <form id="color">
+    <form id="colors">
         <div>
             <input id="red" type="range" min="0" max="255">
-            <output id="redOutput" name="redOutput" for="red" onforminput="value = red.valueAsNumber;"
-                    class="output"></output>
+            <output id="redOutput" name="redOutput" for="red" class="output"></output>
             <label for="red">Red</label>
         </div>
         <div>
             <input id="green" type="range" min="0" max="255">
+            <output id="greenOutput" name="greenOutput" for="green" class="output"></output>
             <label for="green">Green</label>
         </div>
         <div>
             <input id="blue" type="range" min="0" max="255">
+            <output id="blueOutput" name="blueOutput" for="blue" class="output"></output>
             <label for="blue">Blue</label>
         </div>
+        <button type="submit">Change</button>
     </form>
 
     <script>
-        const redOutput = document.getElementById('redOutput');
-        const red = document.getElementById('red');
+        const form = document.getElementById('colors');
 
-        redOutput.value = parseInt(red.value);
-        const form = document.getElementById('color').addEventListener('input', () => {
-            redOutput.value = parseInt(red.value);
-        });
+        function addColorListener(inputId, outputId) {
+            const output = document.getElementById(outputId);
+            const input = document.getElementById(inputId);
+
+            output.value = parseInt(input.value);
+            form.addEventListener('input', () => {
+                output.value = parseInt(input.value);
+            });
+        }
+
+        function getColorValue(id) {
+            const output = document.getElementById(`${id}Output`);
+            return output.value;
+        }
+
+        addColorListener('red', 'redOutput');
+        addColorListener('green', 'greenOutput');
+        addColorListener('blue', 'blueOutput');
+
+        const submit = document.getElementsByTagName('button')[0];
+        submit.addEventListener('click', () => {
+            (async () => {
+              const rawResponse = await fetch('http://127.0.0.1:5000/color', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    r: getColorValue('red'),
+                    g: getColorValue('green'),
+                    b: getColorValue('blue'),
+                })
+              });
+              const content = await rawResponse.json();
+              console.log(content);
+            })();
+        })
     </script>
 </body>
 </html>
