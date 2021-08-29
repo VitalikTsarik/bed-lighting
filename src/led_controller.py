@@ -1,11 +1,13 @@
 import json
 import subprocess
-from os import popen, path
+from os import popen
 
 WATCHER_PATH = "./watcher.py"
-STATUS_PATH = "./status.txt"
+STATUS_PATH = "./status.json"
 print(WATCHER_PATH)
 print(STATUS_PATH)
+with open(STATUS_PATH) as f:
+    print(json.load(f))
 
 
 def update_led(red, green, blue):
