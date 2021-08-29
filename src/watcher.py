@@ -1,5 +1,4 @@
 import json
-import time
 
 from rpi_ws281x import PixelStrip, Color
 from watchdog.events import FileSystemEventHandler
@@ -24,15 +23,13 @@ class LedHandler(FileSystemEventHandler):
     def on_closed(self, event):
         if event.src_path == STATUS_PATH:
             try:
-                # time.sleep(0.1)
                 with open(STATUS_PATH, 'r', encoding='utf-8') as f:
-                    colors = json.loads(f.read())
+                    colors = json.load(f)
                 color = Color(colors['red'], colors['green'], colors['blue'])
                 colorWipe(strip, color)
 
             except OSError:
                 print('File reading error')
-                LedHandler()
 
 
 event_handler = LedHandler()
