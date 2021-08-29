@@ -2,8 +2,8 @@ import json
 import subprocess
 from os import popen, path
 
-WATCHER_PATH = path.join(path.dirname(__file__), 'watcher.py')
-STATUS_PATH = path.join(path.dirname(__file__), 'status.txt')
+WATCHER_PATH = "./watcher.py"
+STATUS_PATH = "./status.txt"
 print(WATCHER_PATH)
 print(STATUS_PATH)
 
