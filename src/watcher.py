@@ -21,8 +21,6 @@ strip.begin()
 
 class LedHandler(FileSystemEventHandler):
     def on_modified(self, event):
-        print(event.src_path)
-        print(STATUS_PATH)
         if event.src_path == STATUS_PATH:
             try:
                 colors = json.load(open(STATUS_PATH, 'r'))
