@@ -31,8 +31,6 @@ class LedHandler(FileSystemEventHandler):
             except OSError:
                 print('File reading error')
                 LedHandler()
-        else:
-            raise FileNotFoundError()
 
 
 event_handler = LedHandler()

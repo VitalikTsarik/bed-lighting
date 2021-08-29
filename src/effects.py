@@ -3,12 +3,13 @@ import time
 from rpi_ws281x import Color
 
 
-def colorWipe(strip, color=Color(0, 0, 0), wait_ms=50):
+def colorWipe(strip, color=Color(0, 0, 0)):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
         strip.show()
-        time.sleep(wait_ms / 2000.0)
+
+    strip.show()
 
 
 def theaterChase(strip, color=Color(0, 100, 0), wait_ms=50, iterations=10):
