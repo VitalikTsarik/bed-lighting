@@ -7,7 +7,6 @@ def colorWipe(strip, color=Color(0, 0, 0)):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
-        strip.show()
 
     strip.show()
 
