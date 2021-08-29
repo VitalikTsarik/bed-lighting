@@ -23,21 +23,20 @@ addColorListener('green', 'greenOutput');
 addColorListener('blue', 'blueOutput');
 
 const submit = document.getElementsByTagName('button')[0];
-submit.addEventListener('click', () => {
-    (async () => {
-        const rawResponse = await fetch(CHANGE_COLOR_URL, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                r: getColorValue('red'),
-                g: getColorValue('green'),
-                b: getColorValue('blue'),
-            })
-        });
-        const content = await rawResponse.json();
-        console.log(content);
-    })();
+submit.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const rawResponse = await fetch(CHANGE_COLOR_URL, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            r: getColorValue('red'),
+            g: getColorValue('green'),
+            b: getColorValue('blue'),
+        })
+    });
+    const content = await rawResponse.json();
+    console.log(content);
 });
