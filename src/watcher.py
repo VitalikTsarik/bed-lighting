@@ -23,6 +23,7 @@ class LedHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.src_path == STATUS_PATH:
             try:
+                print(STATUS_PATH)
                 with open(STATUS_PATH, 'r', encoding='utf-8') as f:
                     print(f.read())
                 with open(STATUS_PATH, 'r', encoding='utf-8') as f:
