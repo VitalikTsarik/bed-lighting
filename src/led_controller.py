@@ -6,9 +6,10 @@ WATCHER_PATH = './watcher.py'
 STATUS_PATH = './status.json'
 
 
-def update_led(red, green, blue):
+def update_color_status(red, green, blue):
     try:
-        json.dump({'red': red, 'green': green, 'blue': blue}, open(STATUS_PATH, 'w', encoding='utf-8'))
+        with open(STATUS_PATH, 'w', encoding='utf-8') as f:
+            json.dump({'red': red, 'green': green, 'blue': blue}, f)
     except OSError:
         return 'failed'
 

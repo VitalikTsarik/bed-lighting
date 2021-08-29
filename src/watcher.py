@@ -23,7 +23,8 @@ class LedHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.src_path == STATUS_PATH:
             try:
-                colors = json.loads(open(STATUS_PATH, 'r', encoding='utf-8').read())
+                with open(STATUS_PATH, 'r', encoding='utf-8') as f:
+                    colors = json.loads(f.read())
                 print('colors: ', colors)
                 print('type of color: ', type(colors['red']))
                 color = Color(colors['red'], colors['green'], colors['blue'])

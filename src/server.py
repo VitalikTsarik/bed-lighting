@@ -1,6 +1,6 @@
 from flask import Flask, current_app, url_for, request, jsonify
 
-from led_controller import update_led, start_visualization
+from led_controller import update_color_status, start_visualization
 
 app = Flask(__name__)
 
@@ -19,11 +19,10 @@ def index():
 def led():
     try:
         data = request.json
-        print(data)
         red = data.get('r')
         green = data.get('g')
         blue = data.get('b')
-        resp = update_led(red, green, blue)
+        resp = update_color_status(red, green, blue)
     except ValueError:
         resp = 'missing required param (red, green, blue)'
 
