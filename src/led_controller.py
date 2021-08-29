@@ -8,7 +8,7 @@ STATUS_PATH = './status.json'
 
 def update_led(red, green, blue):
     try:
-        json.dump({'red': red, 'green': green, 'blue': blue}, open(STATUS_PATH, 'w'))
+        json.dump({'red': red, 'green': green, 'blue': blue}, open(STATUS_PATH, 'w', encoding='utf-8'))
     except OSError:
         return 'failed'
 
