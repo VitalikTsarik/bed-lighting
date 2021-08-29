@@ -35,7 +35,7 @@ class LedHandler(FileSystemEventHandler):
 
 event_handler = LedHandler()
 observer = Observer()
-observer.schedule(event_handler, path=STATUS_PATH)
+observer.schedule(event_handler, path='.')
 observer.start()
 
 observer.join()
