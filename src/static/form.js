@@ -15,7 +15,7 @@ function addColorListener(inputId, outputId) {
 
 function getColorValue(id) {
     const output = document.getElementById(`${id}Output`);
-    return output.value;
+    return Number(output.value);
 }
 
 addColorListener('red', 'redOutput');
