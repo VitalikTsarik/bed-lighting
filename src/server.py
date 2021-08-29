@@ -31,3 +31,4 @@ def led():
 
 with app.test_request_context():
     url_for('static', filename='styles.css')
+    url_for('static', filename='form.js')
