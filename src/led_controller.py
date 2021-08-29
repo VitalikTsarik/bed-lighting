@@ -9,7 +9,7 @@ STATUS_PATH = './status.json'
 def update_color_status(red, green, blue):
     try:
         with open(STATUS_PATH, 'w', encoding='utf-8') as f:
-            json.dump({'red': red, 'green': green, 'blue': blue}, f)
+            f.write(json.dumps({'red': red, 'green': green, 'blue': blue}))
     except OSError:
         return 'failed'
 
