@@ -21,12 +21,10 @@ strip.begin()
 
 class LedHandler(FileSystemEventHandler):
     def on_modified(self, event):
+        print(event.src_path)
         if event.src_path == STATUS_PATH:
             try:
                 colors = json.loads(open(STATUS_PATH, 'r', encoding='utf-8').read())
-                print(colors['red'])
-                print(type(colors['green']))
-                print(int(colors['blue']))
                 color = Color(colors['red'], colors['green'], colors['blue'])
                 colorWipe(strip, color)
 
