@@ -19,6 +19,7 @@ def index():
 def led():
     try:
         data = request.json
+        print(data)
         red = data.get('r')
         green = data.get('g')
         blue = data.get('b')
