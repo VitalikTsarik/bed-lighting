@@ -1,5 +1,4 @@
 import json
-import subprocess
 from os import popen
 
 WATCHER_PATH = './watcher.py'
@@ -17,8 +16,7 @@ def update_color_status(red, green, blue):
 
 
 def start_visualization():
-    process = subprocess.Popen(['sudo', 'python3', WATCHER_PATH])
-    process.communicate()
+    popen(f'sudo python3 {WATCHER_PATH}')
 
 
 def stop_visualization():
