@@ -17,7 +17,8 @@ def update_color_status(red, green, blue):
 
 
 def start_visualization():
-    subprocess.Popen(['sudo', 'python3', WATCHER_PATH])
+    process = subprocess.Popen(['sudo', 'python3', WATCHER_PATH])
+    process.communicate()
 
 
 def stop_visualization():
