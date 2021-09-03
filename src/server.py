@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
 
@@ -49,7 +51,9 @@ def led():
     except ValueError:
         resp = 'missing required param (red, green, blue)'
 
-    return jsonify({'message': resp})
+    resp['localTime'] = datetime.now()
+
+    return jsonify(resp)
 
 
 with app.test_request_context():
