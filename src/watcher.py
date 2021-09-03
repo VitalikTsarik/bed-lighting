@@ -24,9 +24,12 @@ class LedHandler(FileSystemEventHandler):
         if event.src_path == STATUS_PATH:
             try:
                 with open(STATUS_PATH, 'r', encoding='utf-8') as f:
-                    colors = json.load(f)
-                color = Color(colors['red'], colors['green'], colors['blue'])
-                colorWipe(strip, color)
+                    color = json.load(f)
+
+                red = color.get('red') or 0
+                green = color.get('green') or 0
+                blue = color.get('blue') or 0
+                colorWipe(strip, Color(red, green, blue))
 
             except OSError:
                 print('File reading error')

@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
 
-from led_controller import update_color_status, start_visualization, get_color_status
+import led_controller
 
 
 class Config:
@@ -17,14 +17,9 @@ scheduler = APScheduler()
 scheduler.init_app(app)
 
 
-@scheduler.task(trigger='cron', id='sunset', minute='*', hour='23')
+@scheduler.task(trigger='cron', id='sunset', minute='0', hour='20')
 def turn_on_lights():
-    status = get_color_status()
-
-    if status['red'] == 10:
-        update_color_status(0, 0, 10)
-    else:
-        update_color_status(10, 0, 0)
+    led_controller.lights_on()
 
 
 scheduler.start()
@@ -32,7 +27,7 @@ scheduler.start()
 
 @app.before_first_request
 def start_led_watcher():
-    start_visualization()
+    led_controller.start()
 
 
 @app.route('/')
@@ -48,12 +43,10 @@ def led():
         red = data.get('r')
         green = data.get('g')
         blue = data.get('b')
-        error = update_color_status(red, green, blue)
-        if error:
-            response['errorMessage'] = error
+        led_controller.update_color(red, green, blue)
 
-    except ValueError:
-        response = 'missing required param (red, green, blue)'
+    except Exception as e:
+        response['errorMessage'] = e
 
     response['localTime'] = datetime.now()
 
