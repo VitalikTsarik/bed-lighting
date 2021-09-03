@@ -42,18 +42,22 @@ def index():
 
 @app.route('/color', methods=['POST'])
 def led():
+    response = {}
     try:
         data = request.json
         red = data.get('r')
         green = data.get('g')
         blue = data.get('b')
-        resp = update_color_status(red, green, blue)
+        error = update_color_status(red, green, blue)
+        if error:
+            response['errorMessage'] = error
+
     except ValueError:
-        resp = 'missing required param (red, green, blue)'
+        response = 'missing required param (red, green, blue)'
 
-    resp['localTime'] = datetime.now()
+    response['localTime'] = datetime.now()
 
-    return jsonify(resp)
+    return jsonify(response)
 
 
 with app.test_request_context():
