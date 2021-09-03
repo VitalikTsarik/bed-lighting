@@ -1,10 +1,7 @@
 from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
-from rpi_ws281x import Color
 
-from effects import colorWipe
-from led_controller import update_color_status, start_visualization
-from watcher import strip
+from led_controller import update_color_status, start_visualization, get_color_status
 
 
 class Config:
@@ -20,10 +17,12 @@ scheduler.init_app(app)
 
 @scheduler.task('cron', id='sunset', minute='*')
 def turn_on_lights():
-    if strip.getPixelColor(0) == Color(10, 0, 0):
-        colorWipe(strip, Color(0, 0, 10))
+    status = get_color_status()
+
+    if status['red'] == 10:
+        update_color_status(0, 0, 10)
     else:
-        colorWipe(strip, Color(10, 0, 0))
+        update_color_status(10, 0, 0)
 
 
 scheduler.start()

@@ -15,6 +15,11 @@ def update_color_status(red, green, blue):
     return 'success'
 
 
+def get_color_status():
+    with open(STATUS_PATH, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
 def start_visualization():
     popen(f'sudo python3 {WATCHER_PATH}')
 
