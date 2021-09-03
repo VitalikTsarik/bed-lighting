@@ -32,8 +32,14 @@ class LedHandler(FileSystemEventHandler):
                 print('File reading error')
 
 
+class LedObserver(Observer):
+    def on_thread_stop(self):
+        colorWipe(strip)
+        super().on_thread_stop()
+
+
 event_handler = LedHandler()
-observer = Observer()
+observer = LedObserver()
 observer.schedule(event_handler, path='.')
 observer.start()
 
