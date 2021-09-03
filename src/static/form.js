@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.100.43:5000';
+const BASE_URL = 'http://192.168.100.43';
 const CHANGE_COLOR_URL = `${BASE_URL}/color`;
 
 const form = document.getElementById('colors');
