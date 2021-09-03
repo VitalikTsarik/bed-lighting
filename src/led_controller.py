@@ -1,5 +1,4 @@
 import json
-import os
 from os import popen
 
 WATCHER_PATH = './watcher.py'
@@ -10,8 +9,8 @@ def update_color_status(red, green, blue):
     try:
         with open(STATUS_PATH, 'w', encoding='utf-8') as f:
             json.dump({'red': red, 'green': green, 'blue': blue}, f)
-    except OSError as e:
-        return f'status path {os.getcwd()}+{STATUS_PATH}, message {e}'
+    except OSError:
+        return 'failed'
 
     return 'success'
 
