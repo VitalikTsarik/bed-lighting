@@ -32,3 +32,6 @@ def led():
 with app.test_request_context():
     url_for('static', filename='styles.css')
     url_for('static', filename='form.js')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
