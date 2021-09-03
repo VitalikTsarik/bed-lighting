@@ -1,3 +1,4 @@
+import atexit
 import json
 
 from rpi_ws281x import PixelStrip, Color
@@ -16,7 +17,6 @@ LED_INVERT = False  # True to invert the signal (when using NPN transistor level
 LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-strip.begin()
 
 
 class LedHandler(FileSystemEventHandler):
@@ -32,15 +32,17 @@ class LedHandler(FileSystemEventHandler):
                 print('File reading error')
 
 
-class LedObserver(Observer):
-    def on_thread_stop(self):
-        colorWipe(strip)
-        super().on_thread_stop()
+@atexit.register
+def on_thread_stop():
+    colorWipe(strip)
 
 
-event_handler = LedHandler()
-observer = LedObserver()
-observer.schedule(event_handler, path='.')
-observer.start()
+if __name__ == '__main__':
+    strip.begin()
 
-observer.join()
+    event_handler = LedHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path='.')
+    observer.start()
+
+    observer.join()
