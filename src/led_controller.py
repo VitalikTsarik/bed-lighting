@@ -9,8 +9,8 @@ def update_color_status(red, green, blue):
     try:
         with open(STATUS_PATH, 'w', encoding='utf-8') as f:
             json.dump({'red': red, 'green': green, 'blue': blue}, f)
-    except OSError:
-        return 'failed'
+    except OSError as e:
+        return f'status path {STATUS_PATH}, message {e}'
 
     return 'success'
 
