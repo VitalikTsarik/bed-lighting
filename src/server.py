@@ -17,7 +17,7 @@ scheduler = APScheduler()
 scheduler.init_app(app)
 
 
-@scheduler.task('cron', id='sunset', minute='*')
+@scheduler.task(trigger='cron', id='sunset', minute='*', hours='22')
 def turn_on_lights():
     status = get_color_status()
 
