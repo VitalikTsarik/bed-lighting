@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
 
@@ -61,8 +59,6 @@ def led():
 
     except Exception as e:
         response['errorMessage'] = e
-
-    response['localTime'] = datetime.now()
 
     return jsonify(response)
 
