@@ -22,7 +22,7 @@ def turn_on_lights():
     led_controller.lights_on()
 
 
-scheduler.add_job('sunset', 'lights_turn_on', trigger='cron', hour='20', minute='0')
+scheduler.add_job(id='lights_turn_on', func=turn_on_lights, trigger='cron', hour='20', minute='0')
 
 
 @scheduler.task(id='lights_turn_off', trigger='cron', minute='0', hour='1')
