@@ -4,6 +4,7 @@ from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
 
 import led_controller
+from sunset_helpers import get_sunset_time
 
 
 class Config:
@@ -17,9 +18,22 @@ scheduler = APScheduler()
 scheduler.init_app(app)
 
 
-@scheduler.task(trigger='cron', id='sunset', minute='0', hour='20')
 def turn_on_lights():
     led_controller.lights_on()
+
+
+scheduler.add_job('sunset', 'lights_turn_on', trigger='cron', hour='20', minute='0')
+
+
+@scheduler.task(id='lights_turn_off', trigger='cron', minute='0', hour='1')
+def turn_off_lights():
+    led_controller.lights_off()
+
+
+@scheduler.task(id='adjust_sunset_time', trigger='cron', minute='0', hour='0')
+def adjust_sunset_time():
+    sunset = get_sunset_time()
+    scheduler.scheduler.reschedule_job(id='lights_turn_on', trigger='cron', hour=sunset.hour, minute=sunset.minute)
 
 
 scheduler.start()

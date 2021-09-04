@@ -14,11 +14,14 @@ def stop():
 
 
 def lights_on():
-    with open(STATUS_PATH, 'w', encoding='utf-8') as f:
-        json.dump({'green': 10}, f)
+    update_color(green=10)
 
 
-def update_color(red, green, blue):
+def lights_off():
+    update_color(0, 0, 0)
+
+
+def update_color(red=0, green=0, blue=0):
     with open(STATUS_PATH, 'w', encoding='utf-8') as f:
         json.dump({'red': red, 'green': green, 'blue': blue}, f)
 

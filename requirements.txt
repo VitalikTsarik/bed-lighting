@@ -3,3 +3,4 @@ watchdog~=2.1.5
 flask~=2.0.1
 Flask-APScheduler~=1.12.2
 uwsgi~=2.0.19.1
+suntime~=1.2.5
