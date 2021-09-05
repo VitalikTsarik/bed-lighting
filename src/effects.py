@@ -1,10 +1,11 @@
 import time
+from enum import Enum
 
 from rpi_ws281x import Color
 
 
 def colorWipe(strip, color=Color(0, 0, 0)):
-    """Wipe color across display a pixel at a time."""
+    """Wipe all color across display."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
 
@@ -66,9 +67,27 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
         time.sleep(wait_ms / 1000.0)
 
 
-effects = {
-    'chase': theaterChase,
-    'chaseRainbow': theaterChaseRainbow,
-    'rainbow': rainbow,
-    'rainbowCycle': rainbowCycle,
+def scrollOut(strip, color=Color(0, 100, 0), wait_ms=50):
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(wait_ms / 1000.0)
+
+
+class Effects(Enum):
+    COLOR_WIPE = 'colorWipe'
+    CHASE = 'chase'
+    CHASE_RAINBOW = 'chaseRainbow'
+    RAINBOW = 'rainbow'
+    RAINBOW_CYCLE = 'rainbowCycle'
+    SCROLL_OUT = 'scrollOut'
+
+
+effect2FuncMapping = {
+    Effects.COLOR_WIPE.value: colorWipe,
+    Effects.CHASE.value: theaterChase,
+    Effects.CHASE_RAINBOW.value: theaterChaseRainbow,
+    Effects.RAINBOW.value: rainbow,
+    Effects.RAINBOW_CYCLE.value: rainbowCycle,
+    Effects.SCROLL_OUT.value: scrollOut,
 }

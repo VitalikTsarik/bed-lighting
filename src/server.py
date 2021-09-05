@@ -55,7 +55,7 @@ def led():
         red = data.get('r')
         green = data.get('g')
         blue = data.get('b')
-        led_controller.update_color(red, green, blue)
+        led_controller.update(red, green, blue)
 
     except Exception as e:
         response['errorMessage'] = e

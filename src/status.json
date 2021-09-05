@@ -1,5 +1,8 @@
 {
-  "red": 128,
-  "green": 128,
-  "blue": 128
+  "color": {
+    "red": 0,
+    "green": 0,
+    "blue": 0
+  },
+  "effect": "colorWipe"
 }

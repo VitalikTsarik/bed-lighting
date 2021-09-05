@@ -5,7 +5,7 @@ from rpi_ws281x import PixelStrip, Color
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-from effects import colorWipe
+from effects import colorWipe, Effects, effect2FuncMapping
 from led_controller import STATUS_PATH
 
 LED_COUNT = 30  # Number of LED pixels.
@@ -24,12 +24,16 @@ class LedHandler(FileSystemEventHandler):
         if event.src_path == STATUS_PATH:
             try:
                 with open(STATUS_PATH, 'r', encoding='utf-8') as f:
-                    color = json.load(f)
+                    data = json.load(f)
 
+                color = data.get('color') or {}
                 red = color.get('red') or 0
                 green = color.get('green') or 0
                 blue = color.get('blue') or 0
-                colorWipe(strip, Color(red, green, blue))
+                effect = data.get('effect') or Effects.COLOR_WIPE.value
+
+                effectFunc = effect2FuncMapping[effect]
+                effectFunc(strip, Color(red, green, blue))
 
             except OSError:
                 print('File reading error')
