@@ -2,6 +2,7 @@ from flask import Flask, current_app, url_for, request, jsonify
 from flask_apscheduler import APScheduler
 
 import led_controller
+from effects import Effects
 from sunset_helpers import get_sunset_time
 
 
@@ -48,14 +49,16 @@ def index():
 
 
 @app.route('/color', methods=['POST'])
-def led():
+def color():
     response = {}
     try:
         data = request.json
-        red = data.get('r')
-        green = data.get('g')
-        blue = data.get('b')
-        led_controller.update(red, green, blue)
+        color = data.get('color')
+        red = color.get('red')
+        green = color.get('green')
+        blue = color.get('blue')
+        effect = data.get('effect')
+        led_controller.update(red, green, blue, Effects(effect))
 
     except Exception as e:
         response['errorMessage'] = e

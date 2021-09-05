@@ -6,23 +6,38 @@
     <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <form id="colors">
-        <div>
-            <input id="red" type="range" min="0" max="255">
-            <output id="redOutput" name="redOutput" for="red" class="output"></output>
-            <label for="red">Red</label>
-        </div>
-        <div>
-            <input id="green" type="range" min="0" max="255">
-            <output id="greenOutput" name="greenOutput" for="green" class="output"></output>
-            <label for="green">Green</label>
-        </div>
-        <div>
-            <input id="blue" type="range" min="0" max="255">
-            <output id="blueOutput" name="blueOutput" for="blue" class="output"></output>
-            <label for="blue">Blue</label>
-        </div>
-        <button type="submit">Change</button>
+    <form id="colors" style="width: 300px">
+        <fieldset>
+            <legend>Choose color</legend>
+            <div>
+                <input id="red" type="range" min="0" max="255">
+                <output id="redOutput" name="redOutput" for="red" class="output"></output>
+                <label for="red">Red</label>
+            </div>
+            <div>
+                <input id="green" type="range" min="0" max="255">
+                <output id="greenOutput" name="greenOutput" for="green" class="output"></output>
+                <label for="green">Green</label>
+            </div>
+            <div>
+                <input id="blue" type="range" min="0" max="255">
+                <output id="blueOutput" name="blueOutput" for="blue" class="output"></output>
+                <label for="blue">Blue</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Choose effect</legend>
+            <select id="effect">
+                <option value=”colorWipe”>Color wipe</option>
+                <option value=”chase”>Chase</option>
+                <option value=”chaseRainbow”>Chase rainbow</option>
+                <option value=”rainbow”>Rainbow</option>
+                <option value=”rainbowCycle”>Rainbow cycle</option>
+                <option value=”scrollOut”>Scroll out</option>
+            </select>
+        </fieldset>
+        <button type="submit">Submit</button>
     </form>
 
     <script src="static/form.js"></script>
