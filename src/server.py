@@ -48,8 +48,8 @@ def index():
     return current_app.send_static_file('index.html')
 
 
-@app.route('/color', methods=['POST'])
-def color():
+@app.route('/led', methods=['POST'])
+def led():
     response = {}
     try:
         data = request.json

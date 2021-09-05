@@ -1,5 +1,5 @@
 const BASE_URL = 'http://192.168.100.43';
-const CHANGE_COLOR_URL = `${BASE_URL}/color`;
+const LED_URL = `${BASE_URL}/led`;
 
 const form = document.getElementById('colors');
 
@@ -28,7 +28,7 @@ submit.addEventListener('click', async (e) => {
 
     const effect = document.getElementById(`effect`).value;
 
-    const rawResponse = await fetch(CHANGE_COLOR_URL, {
+    const rawResponse = await fetch(LED_URL, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
