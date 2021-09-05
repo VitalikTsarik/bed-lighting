@@ -24,6 +24,7 @@ def lights_off():
 
 
 def update(red=0, green=0, blue=0, effect=Effects.COLOR_WIPE):
+    print(red, green, blue, effect)
     with open(STATUS_PATH, 'w', encoding='utf-8') as f:
         json.dump({
             'color': {
