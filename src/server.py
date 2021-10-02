@@ -34,7 +34,7 @@ def turn_off_lights():
 @scheduler.task(id='adjust_sunset_time', trigger='cron', minute='0', hour='0', next_run_time=datetime.now())
 def adjust_sunset_time():
     sunset = get_sunset_time()
-    scheduler.scheduler.reschedule_job(id='lights_turn_on', trigger='cron', hour=sunset.hour, minute=sunset.minute)
+    scheduler.scheduler.reschedule_job(job_id='lights_turn_on', trigger='cron', hour=sunset.hour, minute=sunset.minute)
 
 
 scheduler.start()
