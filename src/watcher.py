@@ -8,7 +8,7 @@ from watchdog.observers import Observer
 from effects import colorWipe, Effects, effect2FuncMapping
 from led_controller import STATUS_PATH
 
-LED_COUNT = 30  # Number of LED pixels.
+LED_COUNT = 60 * 10  # Number of LED pixels: LED/m * m
 LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10  # DMA channel to use for generating signal (try 10)
