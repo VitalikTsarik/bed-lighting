@@ -16,7 +16,8 @@ def stop():
 
 
 def lights_on():
-    update(green=10, effect=Effects.SCROLL_OUT)
+    # TODO: make color and effect configurable from frontend
+    update(green=180, effect=Effects.SCROLL_OUT)
 
 
 def lights_off():

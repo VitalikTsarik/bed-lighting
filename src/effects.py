@@ -67,7 +67,7 @@ def rainbowCycle(strip, wait_ms=20, iterations=5):
         time.sleep(wait_ms / 1000.0)
 
 
-def scrollOut(strip, color=Color(0, 100, 0), wait_ms=50):
+def scrollOut(strip, color=Color(0, 100, 0), wait_ms=10):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
         strip.show()
