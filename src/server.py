@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 from flask import Flask, request, jsonify, render_template
@@ -16,8 +15,7 @@ class Config:
 
 app = Flask(__name__, static_folder='frontend/build/static', template_folder='frontend/build')
 
-if os.environ['FLASK_ENV'] == 'development':
-    CORS(app)
+CORS(app)
 
 app.config.from_object(Config())
 
