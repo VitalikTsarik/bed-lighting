@@ -1,7 +1,9 @@
+import os
 from datetime import datetime
 
-from flask import Flask, current_app, url_for, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_apscheduler import APScheduler
+from flask_cors import CORS
 
 import led_controller
 from effects import Effects
@@ -12,7 +14,11 @@ class Config:
     SCHEDULER_API_ENABLED = True
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend/build/static', template_folder='frontend/build')
+
+if os.environ['FLASK_ENV'] == 'development':
+    CORS(app)
+
 app.config.from_object(Config())
 
 scheduler = APScheduler()
@@ -47,7 +53,7 @@ def start_led_watcher():
 
 @app.route('/')
 def index():
-    return current_app.send_static_file('index.html')
+    return render_template('index.html')
 
 
 @app.route('/led', methods=['POST'])
@@ -67,10 +73,6 @@ def led():
 
     return jsonify(response)
 
-
-with app.test_request_context():
-    url_for('static', filename='styles.css')
-    url_for('static', filename='form.js')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
