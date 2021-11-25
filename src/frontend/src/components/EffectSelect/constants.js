@@ -1,4 +1,4 @@
 export const EffectsType = Object.freeze({
-    Instant: 'wipeOut',
+    Instant: 'instant',
     ScrollOut: 'scrollOut',
 });

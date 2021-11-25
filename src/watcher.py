@@ -30,7 +30,7 @@ class LedHandler(FileSystemEventHandler):
                 red = color.get('red') or 0
                 green = color.get('green') or 0
                 blue = color.get('blue') or 0
-                effect = data.get('effect') or Effects.COLOR_WIPE.value
+                effect = data.get('effect') or Effects.INSTANT.value
 
                 effectFunc = effect2FuncMapping[effect]
                 effectFunc(strip, Color(red, green, blue))
