@@ -24,7 +24,7 @@ def lights_off():
     update(0, 0, 0, Effects.SCROLL_OUT)
 
 
-def update(red=0, green=0, blue=0, effect=Effects.COLOR_WIPE):
+def update(red=0, green=0, blue=0, effect=Effects.INSTANT):
     with open(STATUS_PATH, 'w', encoding='utf-8') as f:
         json.dump({
             'color': {

@@ -75,7 +75,7 @@ def scrollOut(strip, color=Color(0, 100, 0), wait_ms=10):
 
 
 class Effects(Enum):
-    COLOR_WIPE = 'colorWipe'
+    INSTANT = 'instant'
     CHASE = 'chase'
     CHASE_RAINBOW = 'chaseRainbow'
     RAINBOW = 'rainbow'
@@ -84,7 +84,7 @@ class Effects(Enum):
 
 
 effect2FuncMapping = {
-    Effects.COLOR_WIPE.value: colorWipe,
+    Effects.INSTANT.value: colorWipe,
     Effects.CHASE.value: theaterChase,
     Effects.CHASE_RAINBOW.value: theaterChaseRainbow,
     Effects.RAINBOW.value: rainbow,
