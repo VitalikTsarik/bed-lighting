@@ -60,9 +60,9 @@ def led():
     try:
         data = request.json
         color = data.get('color')
-        red = color.get('red')
-        green = color.get('green')
-        blue = color.get('blue')
+        red = color.get('r')
+        green = color.get('g')
+        blue = color.get('b')
         effect = data.get('effect')
         led_controller.update(red, green, blue, Effects(effect))
 
