@@ -2,5 +2,6 @@ rpi-ws281x~=4.3.0
 watchdog~=2.1.5
 flask~=2.0.1
 Flask-APScheduler~=1.12.2
+flask-cors~=3.0.10
 uwsgi~=2.0.19.1
 suntime~=1.2.5
